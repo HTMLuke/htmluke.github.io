@@ -2,26 +2,36 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wartungsarbeiten</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f9f9f9;
-      text-align: center;
-      padding: 50px;
-    }
-    h1 {
-      color: #444;
-    }
-    p {
-      color: #777;
-    }
-  </style>
+  <title>Passwortgeschützt</title>
 </head>
 <body>
-  <h1>🛠️ Wartungsarbeiten</h1>
-  <p>Diese Website ist gerade offline für geplante Wartungsarbeiten.</p>
-  <p>Bitte versuche es später noch einmal.</p>
+  <h2>🔐 Passwort eingeben:</h2>
+  <input type="password" id="pw" placeholder="Passwort">
+  <button onclick="checkPassword()">Login</button>
+
+  <script>
+    async function checkPassword() {
+      const password = document.getElementById("pw").value;
+      const hash = await digestMessage(password);
+
+      // Hash des gespeicherten Passworts (z.B. "geheim123")
+      const correctHash = "5e88489da4b9a...";  // Ersetze durch deinen eigenen Hash
+
+      if (hash === correctHash) {
+        window.location.href = "geschuetzt.html"; // Weiterleitung zu geschützter Seite
+      } else {
+        alert("Falsches Passwort!");
+      }
+    }
+
+    // SHA-256 Hash-Funktion
+    async function digestMessage(message) {
+      const msgUint8 = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+      return hashHex;
+    }
+  </script>
 </body>
 </html>
