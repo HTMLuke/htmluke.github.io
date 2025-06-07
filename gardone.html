@@ -58,27 +58,29 @@
 
   </div>
 
-  <!-- 🎉 Einmaliger, langsamer Konfetti-Effekt -->
+  <!-- 🎉 Hoch und langsam fallendes Konfetti -->
   <script>
     window.addEventListener('load', () => {
-      // unten links
+      // Konfetti von unten links
       confetti({
         particleCount: 150,
         angle: 60,
         spread: 120,
-        startVelocity: 20,
-        gravity: 0.3,
+        startVelocity: 70,     // HOCH schießen
+        gravity: 0.3,          // langsam fallen
+        ticks: 400,            // lang sichtbar
         origin: { x: 0, y: 1 },
         colors: ['#bb0000', '#00bb00', '#0000bb', '#ffffff']
       });
 
-      // unten rechts
+      // Konfetti von unten rechts
       confetti({
         particleCount: 150,
         angle: 120,
         spread: 120,
-        startVelocity: 20,
+        startVelocity: 70,
         gravity: 0.3,
+        ticks: 400,
         origin: { x: 1, y: 1 },
         colors: ['#bb0000', '#00bb00', '#0000bb', '#ffffff']
       });
