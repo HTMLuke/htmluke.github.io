@@ -58,28 +58,29 @@
 
   </div>
 
-  <!-- 🎉 Konfetti-Effekt für 30 Sekunden -->
+  <!-- 🎉 Konfetti aus unteren Ecken für 30 Sekunden -->
   <script>
-    function shootConfettiSide(originX) {
+    function shootConfettiFromCorner(x, angle) {
       confetti({
-        particleCount: 10,
-        angle: originX === 0 ? 60 : 120,
-        spread: 55,
-        origin: { x: originX, y: Math.random() * 0.6 + 0.2 },
+        particleCount: 12,
+        angle: angle,
+        spread: 60,
+        startVelocity: 45,
+        origin: { x: x, y: 1 }, // unten links oder unten rechts
         colors: ['#bb0000', '#ffffff', '#00bb00', '#0000bb']
       });
     }
 
-    // Start Konfetti
+    // Konfetti alle 500ms aus beiden unteren Ecken
     const confettiInterval = setInterval(() => {
-      shootConfettiSide(0); // von links
-      shootConfettiSide(1); // von rechts
-    }, 500);
+      shootConfettiFromCorner(0, 60);  // unten links, nach oben rechts
+      shootConfettiFromCorner(1, 120); // unten rechts, nach oben links
+    }, 900);
 
     // Stop nach 30 Sekunden
     setTimeout(() => {
       clearInterval(confettiInterval);
-    }, 30000); // 30.000 ms = 30 Sekunden
+    }, 22000);
   </script>
 
 </body>
