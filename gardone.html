@@ -58,15 +58,28 @@
 
   </div>
 
-  <!-- 🎉 Konfetti-Effekt beim Laden -->
+  <!-- 🎉 Konfetti-Effekt für 30 Sekunden -->
   <script>
-    window.addEventListener('load', () => {
+    function shootConfettiSide(originX) {
       confetti({
-        particleCount: 150,
-        spread: 100,
-        origin: { y: 0.6 }
+        particleCount: 10,
+        angle: originX === 0 ? 60 : 120,
+        spread: 55,
+        origin: { x: originX, y: Math.random() * 0.6 + 0.2 },
+        colors: ['#bb0000', '#ffffff', '#00bb00', '#0000bb']
       });
-    });
+    }
+
+    // Start Konfetti
+    const confettiInterval = setInterval(() => {
+      shootConfettiSide(0); // von links
+      shootConfettiSide(1); // von rechts
+    }, 500);
+
+    // Stop nach 30 Sekunden
+    setTimeout(() => {
+      clearInterval(confettiInterval);
+    }, 30000); // 30.000 ms = 30 Sekunden
   </script>
 
 </body>
